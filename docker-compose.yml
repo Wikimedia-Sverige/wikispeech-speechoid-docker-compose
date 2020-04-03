@@ -1,0 +1,28 @@
+version: '3'
+services:
+  mishkal:
+    image: wikispeech-mishkal:latest
+    expose:
+     - "8080"
+
+  mary-tts:
+    image: wikispeech-mary-tts-stts:latest
+    environment:
+      - MARY_TTS_MISHKAL_URL=http://mishkal:8080/
+    expose:
+      - "59125"  
+
+  pronlex:
+    image: wikispeech-pronlex:latest
+    expose:
+      - "8787"
+
+  wikispeech-mockup:
+    image: wikispeech-mockup:latest
+    ports:
+      - 10000:10000
+    volumes:
+      - ./volumes/wikispeech_mockup_tmp:/srv/wikispeech-mockup/src/wikispeech_mockup/wikispeech_server/tmp
+    entrypoint: /srv/wikispeech-mockup/docker-compose-entrypoint.sh
+
+
