@@ -12,6 +12,11 @@ services:
     expose:
       - "59125"  
 
+  symbolset:
+    image: wikispeech-symbolset:latest
+    expose:
+     - "8771"
+
   pronlex:
     image: wikispeech-pronlex:latest
     expose:
@@ -25,8 +30,4 @@ services:
       - ./volumes/wikispeech_mockup_tmp:/srv/wikispeech-mockup/src/wikispeech_mockup/wikispeech_server/tmp
     entrypoint: /srv/wikispeech-mockup/docker-compose-entrypoint.sh
 
-  symbolset:
-    image: wikispeech-symbolset:latest
-    expose:
-     - "8771"
 
