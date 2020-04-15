@@ -27,6 +27,6 @@ services:
 
   symbolset:
     image: wikispeech-symbolset:latest
-    export:
+    expose:
      - "8771"
 
