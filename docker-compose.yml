@@ -25,4 +25,8 @@ services:
       - ./volumes/wikispeech_mockup_tmp:/srv/wikispeech-mockup/src/wikispeech_mockup/wikispeech_server/tmp
     entrypoint: /srv/wikispeech-mockup/docker-compose-entrypoint.sh
 
+  symbolset:
+    image: wikispeech-symbolset:latest
+    export:
+     - "8771"
 
