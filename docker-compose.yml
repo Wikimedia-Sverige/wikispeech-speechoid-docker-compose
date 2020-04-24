@@ -11,8 +11,7 @@ services:
       - MARY_TTS_MISHKAL_URL=http://mishkal:8080/
     expose:
       - "59125"
-    ports:
-      - "59125:59125"  
+      - "8080"
 
   symbolset:
     image: wikispeech-symbolset:latest
