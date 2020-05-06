@@ -28,7 +28,9 @@ services:
     ports:
       - 10000:10000
     volumes:
-      - ./volumes/wikispeech_mockup_tmp:/srv/wikispeech-mockup/src/wikispeech_mockup/wikispeech_server/tmp
+      - ./volumes/wikispeech_mockup_tmp:/srv/wikispeech_mockup/wikispeech_server/tmp
+      - ./mockup-compose-files/docker-compose-entrypoint.sh:/srv/wikispeech_mockup/docker-compose-entrypoint.sh
+      - ./mockup-compose-files/docker-compose.conf:/srv/wikispeech_mockup/docker-compose.conf
+      - ./mockup-compose-files/wait-for-it.sh:/srv/wikispeech_mockup/wait-for-it.sh
     entrypoint: /srv/wikispeech-mockup/docker-compose-entrypoint.sh
-
 

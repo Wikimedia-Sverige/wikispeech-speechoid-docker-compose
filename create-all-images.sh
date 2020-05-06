@@ -50,17 +50,19 @@ m_process() {
     fi
   fi
 
-  if ! ./prepare.sh; then
-    m_error "Failed to prepare ${DIR}"
+  if [ -f blubber-prepare.sh ]; then
+    if ! ./blubber-prepare.sh; then
+      m_error "Failed to prepare ${DIR}"
+    fi
   fi
-  if ! ./build.sh; then
+  if ! ./blubber-build.sh; then
     m_error "Failed to build ${DIR}"
   fi
   cd ..
 }
 
-m_process "https://github.com/karlwettin/blubberize-mary-tts-stts.git"
-m_process "https://github.com/karlwettin/blubberize-wikispeech-symbolset.git"
-m_process "https://github.com/karlwettin/blubberize-wikispeech-mockup.git"
-m_process "https://github.com/karlwettin/blubberize-pronlex.git"
-m_process "https://github.com/karlwettin/blubberize-mishkal.git"
+m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/mary-tts.git"
+m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/mishkal.git"
+m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/pronlex.git"
+m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/symbolset.git"
+m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/wikispeech_mockup.git"
