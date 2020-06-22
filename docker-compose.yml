@@ -1,5 +1,14 @@
 version: '3'
 services:
+  mariadb:
+    image: mariadb:10.5.3
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pronlex
+      MYSQL_USER: pronlex
+      MYSQL_PASSWORD: pronlex
+
   mishkal:
     image: wikispeech-mishkal:latest
     expose:
@@ -12,6 +21,10 @@ services:
     expose:
       - "59125"
       - "8080"
+    volumes:
+      - ./compose-files/wait-for-it.sh:/srv/compose/wait-for-it.sh
+      - ./compose-files/mary-entrypoint.sh:/srv/compose/entrypoint.sh
+    entrypoint: /srv/compose/entrypoint.sh
 
   symbolset:
     image: wikispeech-symbolset:latest
@@ -22,6 +35,15 @@ services:
     image: wikispeech-pronlex:latest
     expose:
       - "8787"
+    environment:
+      MYSQL_HOST: mariadb
+      MYSQL_USER: pronlex
+      MYSQL_PASSWORD: pronlex
+      MYSQL_DATABASE: pronlex
+    volumes:
+      - ./compose-files/wait-for-it.sh:/srv/compose/wait-for-it.sh
+      - ./compose-files/pronlex-entrypoint.sh:/srv/compose/entrypoint.sh
+    entrypoint: /srv/compose/entrypoint.sh
 
   wikispeech-mockup:
     image: wikispeech-mockup:latest
@@ -29,8 +51,8 @@ services:
       - 10000:10000
     volumes:
       - ./volumes/wikispeech_mockup_tmp:/srv/wikispeech-mockup/wikispeech_server/tmp
-      - ./mockup-compose-files/docker-compose-entrypoint.sh:/srv/compose/docker-compose-entrypoint.sh
-      - ./mockup-compose-files/docker-compose.conf:/srv/compose/docker-compose.conf
-      - ./mockup-compose-files/wait-for-it.sh:/srv/compose/wait-for-it.sh
-    entrypoint: /srv/compose/docker-compose-entrypoint.sh
+      - ./compose-files/mockup-entrypoint.sh:/srv/compose/entrypoint.sh
+      - ./compose-files/mockup.conf:/srv/compose/mockup.conf
+      - ./compose-files/wait-for-it.sh:/srv/compose/wait-for-it.sh
+    entrypoint: /srv/compose/entrypoint.sh
 

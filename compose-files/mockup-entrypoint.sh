@@ -10,4 +10,4 @@ echo "Waiting for all other services to start..."
 
 echo "Starting Wikispeech mockup."
 cd /srv/wikispeech-mockup
-python3 bin/wikispeech /srv/compose/docker-compose.conf
+python3 bin/wikispeech /srv/compose/mockup.conf
