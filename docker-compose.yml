@@ -45,12 +45,12 @@ services:
       - ./compose-files/pronlex-entrypoint.sh:/srv/compose/entrypoint.sh
     entrypoint: /srv/compose/entrypoint.sh
 
-  wikispeech-mockup:
-    image: wikispeech-mockup:latest
+  wikispeech-server:
+    image: wikispeech-server:latest
     ports:
       - 10000:10000
     volumes:
-      - ./volumes/wikispeech_mockup_tmp:/srv/wikispeech-mockup/wikispeech_server/tmp
+      - ./volumes/wikispeech_server_tmp:/srv/wikispeech-server/wikispeech_server/tmp
       - ./compose-files/mockup-entrypoint.sh:/srv/compose/entrypoint.sh
       - ./compose-files/mockup.conf:/srv/compose/mockup.conf
       - ./compose-files/wait-for-it.sh:/srv/compose/wait-for-it.sh

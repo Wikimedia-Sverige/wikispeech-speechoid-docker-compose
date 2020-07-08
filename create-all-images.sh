@@ -65,4 +65,4 @@ m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/mary-tts
 m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/mishkal.git"
 m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/pronlex.git"
 m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/symbolset.git"
-m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/wikispeech_mockup.git"
+m_process "https://gerrit.wikimedia.org/r/mediawiki/services/wikispeech/wikispeech-server.git"
