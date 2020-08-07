@@ -17,19 +17,6 @@ if [ ! -f blubber ]; then
 fi
 export PATH=${PATH}:${SRC}/blubber
 
-if [[ -n "$JAVA_HOME" ]] && [[ -x "$JAVA_HOME/bin/java" ]];  then
-  _java="$JAVA_HOME/bin/java"
-else
-  m_error "JAVA_HOME is not pointing at a valid java home."
-fi
-
-if [[ "$_java" ]]; then
-  version=$("$_java" -version 2>&1 | awk -F '"' '/version/ {print $2}')
-  if ! [[ "$version" =~ ^11\.0\..* ]]; then
-    m_error "JAVA_HOME must point at 11.0.x but was $version. Unable to create compatible Gradle cache. Try update-java-alternatives -l and then manually export JAVA_HOME=..."
-  fi
-fi
-
 m_process() {
   REPO=$1
   regex='([^/]+)\.git$'
@@ -50,11 +37,6 @@ m_process() {
     fi
   fi
 
-  if [ -f blubber-prepare.sh ]; then
-    if ! ./blubber-prepare.sh; then
-      m_error "Failed to prepare ${DIR}"
-    fi
-  fi
   if ! ./blubber-build.sh; then
     m_error "Failed to build ${DIR}"
   fi
