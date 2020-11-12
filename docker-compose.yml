@@ -13,6 +13,7 @@ services:
     image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-mishkal:2020-10-21-115532-production
     expose:
      - "8080"
+    entrypoint: ./interfaces/web/mishkal-webserver.py
 
   mary-tts:
     image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-mary-tts:2020-10-27-065335-production
