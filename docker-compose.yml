@@ -37,10 +37,9 @@ services:
     expose:
       - "8787"
     environment:
-      MYSQL_HOST: mariadb
-      MYSQL_USER: pronlex
-      MYSQL_PASSWORD: pronlex
-      MYSQL_DATABASE: pronlex
+      # If this is set, Pronlex will connect to this MariaDB database.
+      # If this NOT is set, Pronlex will use built in SQLite database.
+      #PRONLEX_MARIADB_URI: speechoid:password@tcp(wikispeech-tts-pronlex:3306)
     volumes:
       - ./compose-files/wait-for-it.sh:/srv/compose/wait-for-it.sh
       - ./compose-files/pronlex-entrypoint.sh:/srv/compose/entrypoint.sh
