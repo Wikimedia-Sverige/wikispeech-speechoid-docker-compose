@@ -31,6 +31,8 @@ services:
     image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-symbolset:2020-11-11-073024-production
     expose:
      - "8771"
+    ports:
+      - 8771:8771
 
   pronlex:
     image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-pronlex:2020-10-28-141243-production
