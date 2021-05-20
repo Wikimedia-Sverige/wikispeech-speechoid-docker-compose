@@ -4,10 +4,10 @@ services:
     image: mariadb:10.5.3
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: pronlex
-      MYSQL_USER: pronlex
-      MYSQL_PASSWORD: pronlex
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=pronlex
+      - MYSQL_USER=pronlex
+      - MYSQL_PASSWORD=pronlex
 
   mishkal:
     image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-mishkal:2020-10-21-115532-production
@@ -19,13 +19,24 @@ services:
     image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-mary-tts:2020-10-27-065335-production
     environment:
       - MARY_TTS_MISHKAL_URL=http://mishkal:8080/
+#      - HAPROXY_QUEUE_SIZE=100
+#      - HAPROXY_MARY_TTS_BACKEND_MAXIMUM_CONCURRENT_CONNECTIONS=1
+#      - HAPROXY_TIMEOUT_CONNECT=60s
+#      - HAPROXY_TIMEOUT_CLIENT=60s
+#      - HAPROXY_TIMEOUT_SERVER=60s
+#      - HAPROXY_MARY_TTS_FRONTEND_PORT=8080
+#      - HAPROXY_MARY_TTS_BACKEND_PORT=59125
+#      - HAPROXY_STATS_FRONTEND_REFRESH_RATE=4s
     expose:
       - "59125"
       - "8080"
+      - "8404"
     volumes:
       - ./compose-files/wait-for-it.sh:/srv/compose/wait-for-it.sh
       - ./compose-files/mary-entrypoint.sh:/srv/compose/entrypoint.sh
     entrypoint: /srv/compose/entrypoint.sh
+    ports:
+      - 8404:8404
 
   symbolset:
     image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-symbolset:2020-11-11-073024-production
@@ -35,13 +46,14 @@ services:
       - 8771:8771
 
   pronlex:
-    image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-pronlex:2020-10-28-141243-production
+    image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-pronlex:2021-04-22-135621-production
     expose:
       - "8787"
     environment:
       # If this is set, Pronlex will connect to this MariaDB database.
       # If this NOT is set, Pronlex will use built in SQLite database.
-      #PRONLEX_MARIADB_URI: speechoid:password@tcp(wikispeech-tts-pronlex:3306)
+#      - PRONLEX_MARIADB_URI=speechoid:password@tcp(wikispeech-tts-pronlex:3306)
+      - FOO=BAR
     volumes:
       - ./compose-files/wait-for-it.sh:/srv/compose/wait-for-it.sh
       - ./compose-files/pronlex-entrypoint.sh:/srv/compose/entrypoint.sh
