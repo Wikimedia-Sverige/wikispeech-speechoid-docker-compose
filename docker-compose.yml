@@ -64,8 +64,21 @@ services:
       - ./compose-files/pronlex-entrypoint.sh:/srv/compose/entrypoint.sh
     entrypoint: /srv/compose/entrypoint.sh
 
+  # This is a temporary workaround to handle low volume samples from MaryTTS.
+  # https://github.com/Wikimedia-Sverige/wikispeech-server-sox-proxy
+  sox-proxy:
+    image: wikispeech-server-sox-proxy:latest
+    expose:
+      - "5000"
+    ports:
+      - 5000:5000
+    environment:
+      - SPEECHOID_URL=http://wikispeech-server:10001/
+
   wikispeech-server:
     image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-wikispeech-server:2021-05-26-140224-production
+    expose:
+      - "10001"
     ports:
       - 10000:10000
       - 10001:10001
