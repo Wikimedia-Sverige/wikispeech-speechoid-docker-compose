@@ -9,6 +9,11 @@ services:
       - MYSQL_USER=pronlex
       - MYSQL_PASSWORD=pronlex
 
+  ahotts:
+    image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-ahotts:2021-07-07-080449-production
+    expose:
+      - "1200"
+
   mishkal:
     image: docker-registry.wikimedia.org/wikimedia/mediawiki-services-wikispeech-mishkal:2020-10-21-115532-production
     expose:

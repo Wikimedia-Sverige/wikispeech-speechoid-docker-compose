@@ -2,6 +2,7 @@
 
 echo "Waiting for all other services to start..."
 
+/srv/compose/wait-for-it.sh -h ahotts -p 1200 -t 60
 /srv/compose/wait-for-it.sh -h mishkal -p 8080 -t 60
 /srv/compose/wait-for-it.sh -h mary-tts -p 59125 -t 60
 /srv/compose/wait-for-it.sh -h mary-tts -p 8080 -t 60
